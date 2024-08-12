@@ -15,9 +15,7 @@ PAGE_SIZE=1000
 # Function to fetch data from Tenable API
 fetch_data() {
   local offset="$1"
-
-  # Add here by checking in inspect network search for "search api"
-  curl -s -X POST "$TENABLE_API_URL" -H "X-ApiKeys: accessKey=$ACCESS_KEY; secretKey=$SECRET_KEY" -H "Content-Type: application/json" -H "Accept: */*" -H "x-cookie: token= $XCOOKIE" --data-raw "{
+  curl -s -X POST "$TENABLE_API_URL" -H "X-ApiKeys: accessKey=$ACCESS_KEY; secretKey=$SECRET_KEY" -H "Content-Type: application/json" -H "Accept: */*" -H "x-cookie: token=$XCOOKIE" --data-raw "{
       \"filter\": {
         \"and\": [
           {
