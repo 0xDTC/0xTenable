@@ -54,9 +54,9 @@ while [[ $offset -lt $total_items ]]; do
   new_hosts=$(echo "$response" | jq -r '
     .assets[] |
     if (.ipv4_addresses != null and .ipv4_addresses != [] and .fqdn != null) then
-      .ipv4_addresses[] + "\t" + .fqdn
+      .ipv4_addresses[] + "," + .fqdn
     elif (.ipv6_addresses != null and .ipv6_addresses != [] and .fqdn != null) then
-      .ipv6_addresses[] + "\t" + .fqdn
+      .ipv6_addresses[] + "," + .fqdn
     else
       empty
     end
@@ -88,7 +88,7 @@ fi
 filtered_hosts=$(echo "$all_hosts" | awk 'NF' | grep -v '^\[\].*\[\]$')
 
 # Create a new CSV file with headers
-echo -e "IP Address\tFQDN" > "$OUTPUT_FILE"
+echo -e "IP Address,Host" > "$OUTPUT_FILE"
 
 # Append the filtered hosts to the CSV file
 echo -e "$filtered_hosts" >> "$OUTPUT_FILE"
