@@ -87,10 +87,13 @@ fi
 # Filter out lines that contain empty fields
 filtered_hosts=$(echo "$all_hosts" | awk 'NF' | grep -v '^\[\].*\[\]$')
 
+# Debugging: Print the filtered hosts before writing to file
+echo "Filtered hosts: $filtered_hosts"
+
 # Create a new CSV file with headers
 echo -e "IP Address,Host" > "$OUTPUT_FILE"
 
 # Append the filtered hosts to the CSV file
-echo -e "$filtered_hosts" >> "$OUTPUT_FILE"
+echo "$filtered_hosts" >> "$OUTPUT_FILE"
 
 echo "Data successfully written to $OUTPUT_FILE"
